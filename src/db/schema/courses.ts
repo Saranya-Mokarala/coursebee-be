@@ -1,0 +1,27 @@
+import { pgTable, uuid, varchar, text, numeric, timestamp, boolean, integer } from 'drizzle-orm/pg-core';
+
+export const courses = pgTable('courses', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  courseCode: varchar('course_code', { length: 50 }).notNull().unique(),
+  title: varchar('title', { length: 255 }).notNull(),
+  startDate: timestamp('start_date').notNull(),
+  endDate: timestamp('end_date').notNull(),
+  country: varchar('country', { length: 100 }).notNull(),
+  state: varchar('state', { length: 100 }),
+  city: varchar('city', { length: 100 }),
+  address: text('address'),
+  postalCode: varchar('postal_code', { length: 20 }),
+  email: varchar('email', { length: 255 }),
+  phoneNumber: varchar('phone_number', { length: 30 }),
+  teachers: text('teachers'),
+  courseFees: numeric('course_fees', { precision: 10, scale: 2 }),
+  registrationRequired: boolean('registration_required').default(false).notNull(),
+  onlineEvent: boolean('online_event').default(false).notNull(),
+  courseLanguages: text('course_languages'),
+  courseTimings: text('course_timings'),
+  registrationUrl: text('registration_url'),
+  courseUrl: text('course_url'),
+  capacityMax: integer('capacity_max'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
